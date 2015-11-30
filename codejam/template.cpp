@@ -95,8 +95,8 @@ void run(){
 
 }
 int main(){
-    freopen("in.txt","r",stdin);
-    freopen("out.txt","w",stdout);
+    freopen("A.in","r",stdin);
+    freopen("A.out","w",stdout);
     int T,cas=0;
     cin>>T;
     while (T--){
