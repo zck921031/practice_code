@@ -130,7 +130,7 @@ void run(){
 //            mid = fmid;
 //            break;
 //        }
-        if( fl*fmid <= 0 ) r = mid;
+        if( fmid < 0 ) r = mid;
         else l = mid;
     }
 //    double ans = mid - 1.0;
@@ -139,8 +139,8 @@ void run(){
 //    ans -= 1.0;
     if( f(a,M,0.0)*f(a,M,2.0) > 0 ) cerr<<"bug1!"<<endl;
     double ans = mid - 1.0;
-    ans = max(ans, -1.0 + 1e-12);
-    ans = min(ans,  1.0 - 1e-12);
+//    ans = max(ans, -1.0 + 1e-12);
+//    ans = min(ans,  1.0 - 1e-12);
     cout<<fixed<<setprecision(15)<<ans<<endl;
 
     if( fabs(f(a,M,mid))>1e-2 ){

@@ -13,7 +13,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		System.setIn( new FileInputStream("C-large-practice.in") );
 		System.setOut(new PrintStream("C-large-practice.out") );
-		System.setErr(new PrintStream("C-large-practice.log") );
+		//System.setErr(new PrintStream("C-large-practice.log") );
 		Scanner cin = new Scanner(System.in);
 		int T = cin.nextInt();
 		for(int cas=1; cas<=T; cas++){
@@ -45,7 +45,7 @@ public class Main {
 				if ( fmid.compareTo(BigDecimal.ZERO)==0 ){
 					break;
 				}
-				if( fl.multiply(fmid).compareTo(BigDecimal.ZERO)<=0 ){
+				if( fmid.compareTo(BigDecimal.ZERO)<0 ){
 					r = mid;
 				}else{
 					l = mid;
