@@ -37,7 +37,8 @@ for i in range(9):
     plt.subplot(3,3,i+1)
     plt.imshow(X_train[i], cmap='gray', interpolation='none')
     plt.title("Class {}".format(y_train[i]))
-    
+plt.show()
+
 if K.image_dim_ordering() == 'th':
     X_train = X_train.reshape(X_train.shape[0], 1, img_rows, img_cols)
     X_test = X_test.reshape(X_test.shape[0], 1, img_rows, img_cols)
@@ -60,19 +61,20 @@ Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
-model.add(Convolution2D(nb_filters, kernel_size[0], kernel_size[1],
-                        border_mode='valid', activation='relu',
-                        input_shape=input_shape))
-model.add(Convolution2D(nb_filters, kernel_size[0], kernel_size[1], activation='relu'))
-model.add(MaxPooling2D(pool_size=pool_size))
-model.add(Dropout(0.25))
+model.add(Convolution2D(12, 5, 5, activation = 'relu', input_shape=input_shape,
+                        init='he_normal'))
+# For an explanation on pooling layers see http://cs231n.github.io/convolutional-networks/#pool
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Convolution2D(25, 5, 5, activation = 'relu', init='he_normal'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+# Flatten the 3D output to 1D tensor for a fully connected layer to accept the input
 model.add(Flatten())
-model.add(Dense(128, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(nb_classes, activation='softmax'))
+model.add(Dense(120, activation = 'relu', init='he_normal'))
+model.add(Dense(84, activation = 'relu', init='he_normal'))
+model.add(Dense(nb_classes, activation = 'softmax', init='he_normal')) #Last layer with one output per class
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='adadelta',
+              optimizer='nadam',
               metrics=['accuracy'])
 
 model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,
