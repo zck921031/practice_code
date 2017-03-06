@@ -74,7 +74,7 @@ model.add(Dense(84, activation = 'relu', init='he_normal'))
 model.add(Dense(nb_classes, activation = 'softmax', init='he_normal')) #Last layer with one output per class
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='nadam',
+              optimizer='adamax',
               metrics=['accuracy'])
 
 model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,
